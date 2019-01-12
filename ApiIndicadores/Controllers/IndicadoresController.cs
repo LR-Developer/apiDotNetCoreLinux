@@ -8,20 +8,20 @@ namespace ApiIndicadores.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ValuesController : ControllerBase
+    public class IndicadoresController : ControllerBase
     {
         // GET api/values
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        public IEnumerable<Indicador> Get([FromServices]IndicadoresDAO _dao)
         {
-            return new string[] { "value1", "value2" };
+            return _dao.Obter();
         }
 
-        // GET api/values/5
+        // GET api/indicadores/5
         [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
+        public Indicador Get([FromServices]IndicadoresDAO _dao, string id)
         {
-            return "value";
+            return _dao.ObterPorId(id);
         }
 
         // POST api/values
