@@ -12,22 +12,23 @@ namespace ApiIndicadores.Controllers
     {
         // GET api/values
         [HttpGet]
-        public IEnumerable<Indicador> Get([FromServices]IndicadoresDAO _dao)
+        public IEnumerable<Indicador> Get([FromServices] IndicadoresDAO _dao)
         {
             return _dao.Obter();
         }
 
         // GET api/indicadores/5
         [HttpGet("{id}")]
-        public Indicador Get([FromServices]IndicadoresDAO _dao, string id)
+        public Indicador Get([FromServices] IndicadoresDAO _dao, string id)
         {
             return _dao.ObterPorId(id);
         }
 
-        // POST api/values
+        // POST api/indicadores
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post([FromServices] IndicadoresDAO _dao, Indicador indicador)
         {
+            _dao.Incluir(indicador);
         }
 
         // PUT api/values/5
@@ -37,9 +38,10 @@ namespace ApiIndicadores.Controllers
         }
 
         // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete("{sigla}")]
+        public void Delete([FromServices] IndicadoresDAO _dao, string sigla)
         {
+            _dao.Excluir(sigla);
         }
     }
 }

@@ -62,5 +62,25 @@ namespace ApiIndicadores
                 return conexao.Get<Indicador>(codIndicador);
             }
         }
+
+        public void Incluir(Indicador indicador)
+        {
+            using(SqlConnection conexao = new SqlConnection(
+                _config.GetConnectionString("BaseIndicadores")
+            ))
+            {
+                conexao.Insert(indicador);
+            }
+        }
+
+        public void Excluir(string sigla)
+        {
+            using(SqlConnection conexao = new SqlConnection(
+                _config.GetConnectionString("BaseIndicadores")
+            ))
+            {
+                conexao.Delete(new Indicador { Sigla = sigla });
+            }
+        }
     }
 }
