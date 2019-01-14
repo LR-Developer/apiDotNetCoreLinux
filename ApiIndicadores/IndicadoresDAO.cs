@@ -73,6 +73,21 @@ namespace ApiIndicadores
             }
         }
 
+        public void Editar(Indicador indicador)
+        {
+            using(SqlConnection conexao = new SqlConnection(
+                _config.GetConnectionString("BaseIndicadores")
+            ))
+            {
+                conexao.Update(new Indicador { 
+                                                Sigla = indicador.Sigla, 
+                                                NomeIndicador = indicador.NomeIndicador, 
+                                                UltimaAtualizacao = indicador.UltimaAtualizacao,
+                                                Valor = indicador.Valor
+                                            });
+            }
+        }
+
         public void Excluir(string sigla)
         {
             using(SqlConnection conexao = new SqlConnection(

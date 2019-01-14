@@ -32,9 +32,10 @@ namespace ApiIndicadores.Controllers
         }
 
         // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut("{sigla}")]
+        public void Put([FromServices] IndicadoresDAO _dao, Indicador indicador)
         {
+            _dao.Editar(indicador);
         }
 
         // DELETE api/values/5
